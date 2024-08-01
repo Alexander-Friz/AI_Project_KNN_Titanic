@@ -1,4 +1,1 @@
-[😒😒😒😒😒😒😂😂🥰🤮🤮😒😒😂😊😒🦾🥰🤮😒😊😂😒🤮😎😎😎😎❌❗‼️🙅❗😒‼️❌
-]
-
-![](https://i.makeagif.com/media/1-25-2014/yqanSI.gif)
+AI project in case our university studies about the knn algorithm on the titanic dataset.
