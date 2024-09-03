@@ -23,16 +23,22 @@ X_test['Sex'] = X_test['Sex'].map({'male': 0, 'female': 1})
 X_test['Embarked'] = X_test['Embarked'].map({'Q': 0, 'S': 1, 'C': 2})
 X_test.fillna(X_train.mean(), inplace=True)  # Imputation von fehlenden Werten in den numerischen Spalten
 
+# Auswahl der besten Features
+best_features = ['Pclass', 'Sex', 'Parch', 'Embarked']
+n_neighbors = 5  # Hier könnte man den besten n_neighbors Wert nutzen, den ihr gefunden habt #n = 26 --> Accuracy von 75,12% // statt standart n = 5 = 73%
+
 # 4. Modell trainieren
-knn = KNeighborsClassifier(n_neighbors=23)  # Hier könnte man den besten n_neighbors Wert nutzen, den ihr gefunden habt
-knn.fit(X_train, y_train)
+knn = KNeighborsClassifier(n_neighbors=n_neighbors)
+knn.fit(X_train[best_features], y_train)
 
 # 5. Vorhersagen auf den Testdaten treffen
-y_test_pred = knn.predict(X_test)
+y_test_pred = knn.predict(X_test[best_features])
 
 # 6. Vergleich mit den tatsächlichen Überlebensdaten
 df_test_with_survival['Predicted_Survived'] = y_test_pred
 df_test_with_survival['Correct'] = df_test_with_survival['Survived'] == df_test_with_survival['Predicted_Survived']
+
+
 
 # 7. Ergebnisse speichern
 df_test_with_survival.to_csv('titanic_test_results.csv', index=False)
@@ -40,13 +46,8 @@ df_test_with_survival.to_csv('titanic_test_results.csv', index=False)
 # Ausgabe der Ergebnisse
 print("Ergebnisse gespeichert in 'titanic_test_results.csv'")
 
-
-correct_predictions = 0
+correct_predictions = df_test_with_survival['Correct'].sum()
 total_predictions = len(df_test_with_survival)
-
-for correct in df_test_with_survival['Correct']:
-    if correct:
-        correct_predictions += 1
 
 accuracy = (correct_predictions / total_predictions) * 100
 print(f"Genauigkeit: {accuracy:.2f}%")
