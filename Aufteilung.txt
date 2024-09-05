@@ -1,0 +1,5 @@
+Präsentation + Datensatz erklären + Einfaches KNN Modell (Jan)
+
+Optimieren des KNN-Modells + Optimiertes KNN-Modell + Diagramm Anzahl K + Hyperparameter Tuning(Alex)
+
+Validierung anhand Test Datensatz + Abfragetool + RDF + Neuronales Netz (Max)
